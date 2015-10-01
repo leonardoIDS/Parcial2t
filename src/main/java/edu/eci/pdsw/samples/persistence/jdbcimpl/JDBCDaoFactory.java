@@ -112,7 +112,7 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public DaoPaciente getDaoPaciente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JDBCDaoPaciente(connectionInstance.get());
     }
     
 }

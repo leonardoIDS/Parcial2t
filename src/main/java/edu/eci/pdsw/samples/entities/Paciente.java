@@ -84,6 +84,15 @@ public class Paciente {
     public void setConsultas(Set<Consulta> consultas) {
         this.consultas = consultas;
     }
+
+    @Override
+    public String toString() {
+        String rep="Paciente:["+id+","+tipo_id+","+nombre+","+fechaNacimiento+"]\n";
+        for (Consulta c:consultas){
+            rep+="\t["+c+"]\n";
+        }
+        return rep;
+    }
     
     
     

@@ -23,16 +23,21 @@ import java.sql.Date;
  * @author hcadavid
  */
 public class Consulta {
+    //el identificador es asignado por la base de datos,
+    //por eso no se incluye en el constructor.
     private int id;
+    
     private Date fechayHora;
     private String resumen;
 
-    public Consulta(int id, Date fechayHora, String resumen) {
-        this.id = id;
+    
+    
+    public Consulta(Date fechayHora, String resumen) {
+        this.id=-1;
         this.fechayHora = fechayHora;
         this.resumen = resumen;
-    }
-
+    }    
+    
     public Consulta() {
     }
 
@@ -58,6 +63,11 @@ public class Consulta {
 
     public void setResumen(String resumen) {
         this.resumen = resumen;
+    }
+
+    @Override
+    public String toString() {
+        return "("+id+","+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
     }
     
     

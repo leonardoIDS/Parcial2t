@@ -54,17 +54,21 @@ public class JDBCDaoPaciente implements DaoPaciente {
             ResultSet rs=ps.executeQuery();
                 
             Paciente p;
-            
+            Consulta c;
             if (rs.next()){
                 p = new Paciente(idpaciente,tipoid,rs.getString("nombre"),rs.getDate("fecha_nacimiento"));
-                p.getConsultas().add(new Consulta(rs.getInt("idCONSULTAS"),rs.getDate("fecha_y_hora"),rs.getString("resumen")));
+                c=new Consulta(rs.getDate("fecha_y_hora"),rs.getString("resumen"));
+                c.setId(rs.getInt("idCONSULTAS"));
+                p.getConsultas().add(c);
             }            
             else{
                 throw new PersistenceException("No row with the given id:"+idpaciente);
             }
 
             while (rs.next()){
-                p.getConsultas().add(new Consulta(rs.getInt("idCONSULTAS"),rs.getDate("fecha_y_hora"),rs.getString("resumen")));
+                c=new Consulta(rs.getDate("fecha_y_hora"),rs.getString("resumen"));
+                c.setId(rs.getInt("idCONSULTAS"));
+                p.getConsultas().add(c);
             }            
             
             return p;
@@ -104,6 +108,38 @@ public class JDBCDaoPaciente implements DaoPaciente {
             throw new PersistenceException("An error ocurred while loading a product.",ex);
         }
 
+    }
+
+    @Override
+    public void update(Paciente p) throws PersistenceException {
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement("insert into CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            for (Consulta c:p.getConsultas()){
+                if (c.getId()==-1){
+                    
+                }
+            }
+            
+            
+            
+                     
+            for (Consulta c:p.getConsultas()){
+                ps.setDate(1, c.getFechayHora());
+                ps.setString(2, c.getResumen());
+                ps.setInt(3, p.getId());
+                ps.setString(4, p.getTipo_id());
+                ps.execute();
+                
+                ResultSet keys=ps.getGeneratedKeys();
+                while(keys.next()){
+                    c.setId(keys.getInt(1));
+                }
+            }
+            
+        } catch (SQLException ex) {
+            throw new PersistenceException("An error ocurred while loading a product.",ex);
+        }        
     }
     
 }

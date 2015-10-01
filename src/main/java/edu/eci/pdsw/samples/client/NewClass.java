@@ -14,23 +14,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.eci.pdsw.samples.persistence;
+package edu.eci.pdsw.samples.client;
 
 import edu.eci.pdsw.samples.entities.Paciente;
-
+import edu.eci.pdsw.samples.persistence.DaoFactory;
+import edu.eci.pdsw.samples.persistence.PersistenceException;
 
 /**
  *
  * @author hcadavid
  */
-public interface DaoPaciente {
-
+public class NewClass {
     
-    public Paciente load(int id, String tipoid) throws PersistenceException;
-    
-    public void save(Paciente p) throws PersistenceException;
-    
-    public void update(Paciente p) throws PersistenceException;
-    
+    public static void main(String args[]) throws PersistenceException{
+        DaoFactory fact=DaoFactory.getInstance();
+        fact.beginSession();
+        
+        
+        
+        Paciente p=DaoFactory.getInstance().getDaoPaciente().load(1,"cc");
+        
+        System.out.println(p);
+        //System.out.println(p.getConsultas().size());
+        
+        fact.endSession();
+    }
     
 }
