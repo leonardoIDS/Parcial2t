@@ -116,26 +116,22 @@ public class JDBCDaoPaciente implements DaoPaciente {
         try {
             ps = con.prepareStatement("insert into CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             for (Consulta c:p.getConsultas()){
+                //Insertar sólo las consultas que no han sido aún persistentes
                 if (c.getId()==-1){
-                    
+                    ps.setDate(1, c.getFechayHora());
+                    ps.setString(2, c.getResumen());
+                    ps.setInt(3, p.getId());
+                    ps.setString(4, p.getTipo_id());
+                    ps.execute();
+
+                    ResultSet keys=ps.getGeneratedKeys();
+                    //Asociar el identificador asignado por la base de datos
+                    while(keys.next()){
+                        c.setId(keys.getInt(1));
+                    }
                 }
             }
             
-            
-            
-                     
-            for (Consulta c:p.getConsultas()){
-                ps.setDate(1, c.getFechayHora());
-                ps.setString(2, c.getResumen());
-                ps.setInt(3, p.getId());
-                ps.setString(4, p.getTipo_id());
-                ps.execute();
-                
-                ResultSet keys=ps.getGeneratedKeys();
-                while(keys.next()){
-                    c.setId(keys.getInt(1));
-                }
-            }
             
         } catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading a product.",ex);

@@ -16,9 +16,12 @@
  */
 package edu.eci.pdsw.samples.client;
 
+import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
+import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -29,14 +32,23 @@ public class NewClass {
     public static void main(String args[]) throws PersistenceException{
         DaoFactory fact=DaoFactory.getInstance();
         fact.beginSession();
+        Date d=new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        /*Date d=new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        Paciente p=new Paciente(11201535,"cc","juan perez",d);
+        p.getConsultas().add(new Consulta(d,"resumen 1"));
+        p.getConsultas().add(new Consulta(d,"resumen 2"));
+        p.getConsultas().add(new Consulta(d,"resumen 3"));
         
+        fact.getDaoPaciente().save(p);*/
         
+        Paciente p=DaoFactory.getInstance().getDaoPaciente().load(11201535,"cc");
+        //p.getConsultas().add(new Consulta(d,"el resumen posterior"));
         
-        Paciente p=DaoFactory.getInstance().getDaoPaciente().load(1,"cc");
+        /*fact.getDaoPaciente().update(p);*/
         
         System.out.println(p);
         //System.out.println(p.getConsultas().size());
-        
+        fact.commitTransaction();
         fact.endSession();
     }
     
