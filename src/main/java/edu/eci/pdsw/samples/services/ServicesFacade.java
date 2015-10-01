@@ -18,12 +18,42 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author hcadavid
  */
 public class ServicesFacade {
+    
+    
+    private static ServicesFacade instance=null;
+    
+    private final Properties properties=new Properties();
+    
+    private ServicesFacade(String propFileName) throws IOException{        
+	InputStream input = null;
+        input = ClassLoader.getSystemResourceAsStream(propFileName);
+        properties.load(input);
+    }
+    
+    public static ServicesFacade getInstance(String propertiesFileName) throws RuntimeException{
+        if (instance==null){
+            try {
+                instance=new ServicesFacade(propertiesFileName);
+            } catch (IOException ex) {
+                throw new RuntimeException("Error on application configuration:",ex);
+            }
+        }        
+        return instance;
+    }
     
     /**
      * Registra un nuevo paciente en el sistema
@@ -32,7 +62,7 @@ public class ServicesFacade {
      * o de persistencia (por ejemplo, si el paciente ya existe).
      */
     public void registrarNuevoPaciente(Paciente p) throws ServiceFacadeException{
-        
+        System.out.println(properties);
     }
     
     /**
