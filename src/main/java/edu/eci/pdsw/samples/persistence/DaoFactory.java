@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.persistence;
 
 import edu.eci.pdsw.samples.persistence.jdbcimpl.JDBCDaoFactory;
+import java.util.Properties;
 
 /**
  *
@@ -29,9 +30,9 @@ public abstract class DaoFactory {
 
     private static DaoFactory instance = null;
 
-    public static DaoFactory getInstance() {
+    public static DaoFactory getInstance(Properties appProperties) {
         if (instance == null) {
-            instance = new JDBCDaoFactory();        
+            instance = new JDBCDaoFactory(appProperties);        
         }
         return instance;
     }

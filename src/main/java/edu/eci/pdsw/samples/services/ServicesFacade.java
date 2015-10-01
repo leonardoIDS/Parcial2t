@@ -18,6 +18,8 @@ package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Consulta;
 import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.persistence.DaoFactory;
+import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,6 +56,26 @@ public class ServicesFacade {
         }        
         return instance;
     }
+
+    /**
+     * Consultar un paciente dado su identificador.
+     * @param idPaciente identificador del paciente
+     * @param tipoid tipo de identificación del paciente
+     * @return el paciente con el identificador dado
+     * @throws ServiceFacadeException  si el paciente no existe
+     */
+    public Paciente consultarPaciente(int idPaciente,String tipoid) throws ServiceFacadeException{
+        DaoFactory daof=DaoFactory.getInstance(properties);
+        try {
+            daof.beginSession();
+            Paciente p=daof.getDaoPaciente().load(idPaciente, tipoid);
+            daof.endSession();
+            return p;
+        } catch (PersistenceException ex) {
+            throw new ServiceFacadeException("Error al consultar paciente.",ex);
+        }
+    }
+    
     
     /**
      * Registra un nuevo paciente en el sistema

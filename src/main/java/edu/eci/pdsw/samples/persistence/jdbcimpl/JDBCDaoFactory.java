@@ -22,6 +22,7 @@ import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  *
@@ -31,13 +32,20 @@ public class JDBCDaoFactory extends DaoFactory {
     
     private static final ThreadLocal<Connection> connectionInstance = new ThreadLocal<Connection>() {
     };
+
+    private static Properties appProperties=null;
+    
+    public JDBCDaoFactory(Properties appProperties) {
+        this.appProperties=appProperties;
+    }
+    
     
     
     private static Connection openConnection() throws PersistenceException{
-            String url="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba";
-            String driver="com.mysql.jdbc.Driver";
-            String user="bdprueba";
-            String pwd="bdprueba";
+            String url=appProperties.getProperty("url");
+            String driver=appProperties.getProperty("driver");
+            String user=appProperties.getProperty("user");
+            String pwd=appProperties.getProperty("pwd");
                         
         try {
             Class.forName(driver);
