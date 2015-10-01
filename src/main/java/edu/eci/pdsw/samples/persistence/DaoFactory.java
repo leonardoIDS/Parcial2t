@@ -38,9 +38,7 @@ public abstract class DaoFactory {
 
     public abstract void beginSession() throws PersistenceException;
 
-    public abstract DaoProducto getDaoProducto();
-
-    public abstract DaoPedido getDaoPedido();
+    public abstract DaoPaciente getDaoPaciente();
 
     public abstract void commitTransaction() throws PersistenceException;
 

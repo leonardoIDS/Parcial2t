@@ -16,9 +16,6 @@
  */
 package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 
-import edu.eci.pdsw.samples.entities.DetallePedido;
-import edu.eci.pdsw.samples.entities.Pedido;
-import edu.eci.pdsw.samples.entities.Producto;
 import java.util.List;
 import java.util.Set;
 import org.apache.ibatis.annotations.Insert;
@@ -35,7 +32,7 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface PedidoMapper {
   
-    
+    /*
     @Select("SELECT p.codigo as cod, p.fecha_radicacion as fr from ORD_PEDIDOS p where p.codigo=#{id}")
     @Results(
             value = {
@@ -58,7 +55,7 @@ public interface PedidoMapper {
             }
     )
     Set<DetallePedido> getDetallePedido(@Param("idped") int idped);
- 
+ */
 
     
 }

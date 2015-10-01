@@ -17,8 +17,7 @@
 package edu.eci.pdsw.samples.persistence.jdbcimpl;
 
 import edu.eci.pdsw.samples.persistence.DaoFactory;
-import edu.eci.pdsw.samples.persistence.DaoPedido;
-import edu.eci.pdsw.samples.persistence.DaoProducto;
+import edu.eci.pdsw.samples.persistence.DaoPaciente;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -66,16 +65,9 @@ public class JDBCDaoFactory extends DaoFactory {
         
     }
 
-    @Override
-    public DaoProducto getDaoProducto() {        
-        return new JDBCDaoProducto(connectionInstance.get());
-    }
 
-    @Override
-    public DaoPedido getDaoPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
+    
+    
     @Override
     public void endSession() throws PersistenceException {
         try {
@@ -116,6 +108,11 @@ public class JDBCDaoFactory extends DaoFactory {
         } catch (SQLException ex) {
             throw new PersistenceException("Error on connection closing.",ex);
         }
+    }
+
+    @Override
+    public DaoPaciente getDaoPaciente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

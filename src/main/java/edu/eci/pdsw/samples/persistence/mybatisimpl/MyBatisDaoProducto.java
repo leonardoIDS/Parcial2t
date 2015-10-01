@@ -16,8 +16,9 @@
  */
 package edu.eci.pdsw.samples.persistence.mybatisimpl;
 
-import edu.eci.pdsw.samples.entities.Producto;
-import edu.eci.pdsw.samples.persistence.DaoProducto;
+
+import edu.eci.pdsw.samples.entities.Paciente;
+import edu.eci.pdsw.samples.persistence.DaoPaciente;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 
@@ -25,23 +26,23 @@ import org.apache.ibatis.session.SqlSession;
  *
  * @author hcadavid
  */
-public class MyBatisDaoProducto implements DaoProducto{
+public class MyBatisDaoProducto implements DaoPaciente{
 
     private SqlSession session=null;
 
     public MyBatisDaoProducto(SqlSession session) {
         this.session=session;
     }
-    
+
     @Override
-    public Producto load(int idProducto) throws PersistenceException {
-        
+    public Paciente load(int id, String tipoid) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void save(Producto p) throws PersistenceException {
+    public void save(Paciente p) throws PersistenceException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

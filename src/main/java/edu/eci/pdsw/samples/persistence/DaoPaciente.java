@@ -14,40 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.eci.pdsw.samples.entities;
+package edu.eci.pdsw.samples.persistence;
+
+import edu.eci.pdsw.samples.entities.Paciente;
+
 
 /**
  *
  * @author hcadavid
  */
-public class DetallePedido {
-    private int cantidad;
-    private Producto producto;
+public interface DaoPaciente {
 
-    public DetallePedido(int cantidad, Producto producto) {
-        this.cantidad = cantidad;
-        this.producto = producto;
-    }
-
-    public DetallePedido() {
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
     
+    public Paciente load(int id, String tipoid) throws PersistenceException;
+    
+    public void save(Paciente p) throws PersistenceException;
     
     
 }

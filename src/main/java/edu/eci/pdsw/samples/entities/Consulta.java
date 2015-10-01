@@ -16,10 +16,49 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.sql.Date;
+
 /**
  *
  * @author hcadavid
  */
 public class Consulta {
+    private int id;
+    private Date fechayHora;
+    private String resumen;
+
+    public Consulta(int id, Date fechayHora, String resumen) {
+        this.id = id;
+        this.fechayHora = fechayHora;
+        this.resumen = resumen;
+    }
+
+    public Consulta() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Date getFechayHora() {
+        return fechayHora;
+    }
+
+    public void setFechayHora(Date fechayHora) {
+        this.fechayHora = fechayHora;
+    }
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
+    
     
 }

@@ -16,10 +16,75 @@
  */
 package edu.eci.pdsw.samples.entities;
 
+import java.sql.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  *
  * @author hcadavid
  */
 public class Paciente {
+    
+    private int id;
+    private String tipo_id;
+    private String nombre;
+    private Date fechaNacimiento;
+    Set<Consulta> consultas;
+    
+
+    public Paciente(int id, String tipo_id, String nombre, Date fechaNacimiento) {
+        this.id = id;
+        this.tipo_id = tipo_id;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        consultas=new LinkedHashSet<>();
+    }
+
+    public Paciente() {
+        consultas=new LinkedHashSet<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTipo_id() {
+        return tipo_id;
+    }
+
+    public void setTipo_id(String tipo_id) {
+        this.tipo_id = tipo_id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Set<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(Set<Consulta> consultas) {
+        this.consultas = consultas;
+    }
+    
+    
     
 }
