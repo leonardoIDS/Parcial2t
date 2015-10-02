@@ -84,7 +84,15 @@ public class ServicesFacade {
      * o de persistencia (por ejemplo, si el paciente ya existe).
      */
     public void registrarNuevoPaciente(Paciente p) throws ServiceFacadeException{
-        System.out.println(properties);
+        DaoFactory daof=DaoFactory.getInstance(properties);
+        try {
+            daof.beginSession();
+            daof.getDaoPaciente().save(p);
+            daof.commitTransaction();
+            daof.endSession();            
+        } catch (PersistenceException ex) {
+            throw new ServiceFacadeException("Error al consultar paciente.",ex);
+        }
     }
     
     /**
@@ -93,7 +101,18 @@ public class ServicesFacade {
      * @param tipoid el tipo de identificación
      * @param c la consulta a ser agregada
      */
-    public void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c){
+    public void agregarConsultaAPaciente(int idPaciente,String tipoid,Consulta c) throws ServiceFacadeException{
+        DaoFactory daof=DaoFactory.getInstance(properties);
+        try {            
+            daof.beginSession();
+            Paciente p=daof.getDaoPaciente().load(idPaciente, tipoid);
+            p.getConsultas().add(c);
+            daof.getDaoPaciente().update(p);
+            daof.commitTransaction();
+            daof.endSession();            
+        } catch (PersistenceException ex) {
+            throw new ServiceFacadeException("Error al consultar paciente.",ex);
+        }
         
     }
     
