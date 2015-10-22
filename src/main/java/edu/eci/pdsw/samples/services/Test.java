@@ -16,9 +16,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
-import edu.eci.pdsw.samples.entities.Consulta;
-import edu.eci.pdsw.samples.entities.Paciente;
-import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.PacienteMapper;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.ComentariosMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
@@ -59,7 +57,7 @@ public class Test {
         //ServicesFacade.getInstance("applicationconfig.properties").registrarNuevoPaciente(p);
         
         
-        ServicesFacade.getInstance("applicationconfig.properties").agregarConsultaAPaciente(333,"cc",new Consulta(new Date(2,2,2), "el ultimo resumen"));
+        //ServicesFacade.getInstance("applicationconfig.properties").agregarConsultaAPaciente(333,"cc",new Consulta(new Date(2,2,2), "el ultimo resumen"));
         /*SqlSessionFactory sqlsf=getSqlSessionFactory();
         SqlSession sf=sqlsf.openSession();
         PacienteMapper pm=sf.getMapper(PacienteMapper.class);

@@ -16,29 +16,21 @@
  */
 package edu.eci.pdsw.samples.entities;
 
-import java.sql.Date;
-
 /**
  *
  * @author hcadavid
  */
-public class Consulta {
-    //el identificador es asignado por la base de datos,
-    //por eso no se incluye en el constructor.
-    private int id;
-    
-    private Date fechayHora;
-    private String resumen;
+public class Suscriptor {
 
-    
-    
-    public Consulta(Date fechayHora, String resumen) {
-        this.id=-1;
-        this.fechayHora = fechayHora;
-        this.resumen = resumen;
-    }    
-    
-    public Consulta() {
+    private int id;
+    private String nombre;
+
+    public Suscriptor(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public Suscriptor() {
     }
 
     public int getId() {
@@ -49,26 +41,15 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getFechayHora() {
-        return fechayHora;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setFechayHora(Date fechayHora) {
-        this.fechayHora = fechayHora;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-
-    public String getResumen() {
-        return resumen;
-    }
-
-    public void setResumen(String resumen) {
-        this.resumen = resumen;
-    }
-
-    @Override
-    public String toString() {
-        return "("+id+","+fechayHora+","+resumen+")"; //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
     
     
 }

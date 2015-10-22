@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.eci.pdsw.samples</groupId>
-    <artifactId>tdd-webapp-base</artifactId>
+    <artifactId>2015-2-par2t</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>tdd-webapp-base</name>
+    <name>2015-2-par2t</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -19,6 +19,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>5.0</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -61,6 +66,61 @@
 
     <build>
         <plugins>
+            
+            
+                        <!-- clean project (also local H2 database)-->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+                <executions>
+                    <execution>
+                        <id>auto-clean</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- create local H2 database -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId> 
+                        <version>1.4.184</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <driver>org.h2.Driver</driver>                    
+                    <url>jdbc:h2:file:./target/db/testdb;MODE=MYSQL</url>
+                    <username>sa</username>
+                    <password></password>
+                    <autocommit>false</autocommit>
+                    <skip>${maven.test.skip}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-db</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <srcFiles>                                
+                                <srcFile>tables.sql</srcFile>                                
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -106,7 +166,30 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <!-- The Jetty plugin allows us to easily test the development build by
+            running jetty:run on the command line. -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.3.v20140905</version>
+                <configuration>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/app</contextPath>
+                    </webApp>                    
+                </configuration>
+            </plugin>
+
+            
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <url>http://repository.primefaces.org/</url>
+            <id>PrimeFaces-maven-lib</id>
+            <layout>default</layout>
+            <name>Repository for library PrimeFaces-maven-lib</name>
+        </repository>
+    </repositories>
 </project>

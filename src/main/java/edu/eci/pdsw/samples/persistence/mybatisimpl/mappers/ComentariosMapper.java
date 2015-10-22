@@ -14,23 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package edu.eci.pdsw.samples.persistence;
+package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 
-import edu.eci.pdsw.samples.entities.Paciente;
-
+import java.util.Map;
+import java.util.Set;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 /**
  *
  * @author hcadavid
  */
-public interface DaoPaciente {
-
-    
-    public Paciente load(int id, String tipoid) throws PersistenceException;
-    
-    public void save(Paciente p) throws PersistenceException;
-    
-    public void update(Paciente p) throws PersistenceException;
+public interface ComentariosMapper {
+  
     
     
 }
