@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.persistence.jdbcimpl;
 
 import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.entities.Suscriptor;
 import edu.eci.pdsw.samples.persistence.DaoComentario;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.sql.Connection;
@@ -24,6 +25,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,12 +48,47 @@ public class JDBCDaoComentario implements DaoComentario {
     
     @Override
     public Set<Comentario> loadAll() throws PersistenceException {
-        throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
+        PreparedStatement ps;
+        HashSet<Comentario> allCom=new HashSet<Comentario>();
+        try {
+            ps = con.prepareStatement("select * from COMENTARIOS");   
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){ 
+                
+                allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+            }
+            return allCom;
+        }catch (SQLException ex) {
+            throw new PersistenceException("An error ocurred while loading an order.",ex);
+        }
+        
+        
+        
+
     }
 
     @Override
     public Set<Comentario> loadByScore(int n) throws PersistenceException {
-        throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
+                PreparedStatement ps;
+        HashSet<Comentario> allCom=new HashSet<Comentario>();
+        try {
+            ps = con.prepareStatement("select * from COMENTARIOS where puntaje > ?");
+            ps.setInt(1, n);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){ 
+                
+                allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+            }
+      
+            
+            return allCom;
+        }catch (SQLException ex) {
+            throw new PersistenceException("An error ocurred while loading an order.",ex);
+        }
+        
+        
+        
+    
     }
     
 }

@@ -2,15 +2,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Todos los comentarios</title>
     </h:head>
     <h:body>
     
         <h:form>
+        <h:outputLabel id="table" />
+        
+        <p:dataTable var="consulta" value="#{servi.comentariosRegistrados}">
+            <f:facet name="header">
+                
+                Todos los comentarios 
+            </f:facet>
+           
+            <p:column headerText="id">
+                
+                <h:outputLabel value="#{Comentario.id}"></h:outputLabel>
+                <f:facet name="footer">
+                    
+                    <h:outputLabel value="Fecha"></h:outputLabel>
+                    
+                    <p:inputText value="#{Comentario.fecha}" >   </p:inputText>
+                 </f:facet>
+                
+            </p:column>
+            <p:column headerText="Comentario">
+                
+                <h:outputLabel value="#{Comentario.comentario}"></h:outputLabel>
+            </p:column>
+            <p:column headerText="Puntaje">
+                
+                <h:outputLabel value="#{Comentario.puntaje}"></h:outputLabel>
+            </p:column>
+            
+             <p:column headerText="Suscriptor">
+                
+                <h:outputLabel value="#{Comentario.suscripto.nombre}"></h:outputLabel>
+            </p:column>
+        </p:dataTable>    
+            
 
-        </h:form>
+            
+            
+            
+         </h:form>      
+        
+        
     </h:body>
 </html>
-
