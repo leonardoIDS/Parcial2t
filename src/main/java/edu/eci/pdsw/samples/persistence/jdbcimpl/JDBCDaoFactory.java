@@ -29,92 +29,75 @@ import java.util.Properties;
  * @author hcadavid
  */
 public class JDBCDaoFactory extends DaoFactory {
-    
+
     private static final ThreadLocal<Connection> connectionInstance = new ThreadLocal<Connection>() {
     };
 
-    private static Properties appProperties=null;
-    
+    private static Properties appProperties = null;
+
     public JDBCDaoFactory(Properties appProperties) {
-        this.appProperties=appProperties;
+        this.appProperties = appProperties;
     }
-    
-    
-    
-    private static Connection openConnection() throws PersistenceException{
-            String url=appProperties.getProperty("url");
-            String driver=appProperties.getProperty("driver");
-            String user=appProperties.getProperty("user");
-            String pwd=appProperties.getProperty("pwd");
-                        
+
+    private static Connection openConnection() throws PersistenceException {
+        String url = appProperties.getProperty("url");
+        String driver = appProperties.getProperty("driver");
+        String user = appProperties.getProperty("user");
+        String pwd = appProperties.getProperty("pwd");
+
         try {
             Class.forName(driver);
-            Connection _con=DriverManager.getConnection(url,user,pwd);
+            Connection _con = DriverManager.getConnection(url, user, pwd);
             _con.setAutoCommit(false);
             return _con;
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new PersistenceException("Error on connection opening.",ex);
+            throw new PersistenceException("Error on connection opening.", ex);
         }
 
     }
-    
+
     @Override
     public void beginSession() throws PersistenceException {
-        try {
-            if (connectionInstance.get()==null || connectionInstance.get().isClosed()){            
-                connectionInstance.set(openConnection());
-            }
-            else{
-                throw new PersistenceException("Session was already opened.");
-            }
-        } catch (SQLException ex) {
-            throw new PersistenceException("An error ocurred while opening a JDBC connection.",ex);
-        }
-        
+        connectionInstance.set(openConnection());
+
     }
 
-
-    
-    
     @Override
     public void endSession() throws PersistenceException {
         try {
-            if (connectionInstance.get()==null || connectionInstance.get().isClosed()){
+            if (connectionInstance.get() == null || connectionInstance.get().isClosed()) {
                 throw new PersistenceException("Conection is null or is already closed.");
-            }
-            else{
+            } else {
                 connectionInstance.get().close();
-            }            
+            }
         } catch (SQLException ex) {
-            throw new PersistenceException("Error on connection closing.",ex);
+            throw new PersistenceException("Error on connection closing.", ex);
         }
     }
 
     @Override
     public void commitTransaction() throws PersistenceException {
         try {
-            if (connectionInstance.get()==null || connectionInstance.get().isClosed()){
+            if (connectionInstance.get() == null || connectionInstance.get().isClosed()) {
                 throw new PersistenceException("Conection is null or is already closed.");
-            }
-            else{
+            } else {
                 connectionInstance.get().commit();
-            }            
+            }
         } catch (SQLException ex) {
-            throw new PersistenceException("Error on connection closing.",ex);
-        }        
+            throw new PersistenceException("Error on connection closing.", ex);
+        }
     }
 
     @Override
     public void rollbackTransaction() throws PersistenceException {
-                try {
-            if (connectionInstance.get()==null || connectionInstance.get().isClosed()){
+        try {
+            if (connectionInstance.get() == null || connectionInstance.get().isClosed()) {
                 throw new PersistenceException("Conection is null or is already closed.");
-            }
-            else{
+            } else {
                 connectionInstance.get().rollback();
-            }            
+            }
         } catch (SQLException ex) {
-            throw new PersistenceException("Error on connection closing.",ex);
+            throw new PersistenceException("Error on connection closing.", ex);
         }
     }
 
@@ -122,5 +105,5 @@ public class JDBCDaoFactory extends DaoFactory {
     public DaoComentario getDaoComentario() {
         return new JDBCDaoComentario(connectionInstance.get());
     }
-    
+
 }

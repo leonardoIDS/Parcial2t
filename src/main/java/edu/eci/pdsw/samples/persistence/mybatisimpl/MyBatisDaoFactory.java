@@ -44,19 +44,25 @@ public class MyBatisDaoFactory extends DaoFactory {
         if (sessionFactory==null){
             synchronized(MyBatisDaoFactory.class){
                 if (sessionFactory==null){
-                    sessionFactory=getSqlSessionFactory(); 
+                    sessionFactory=getSqlSessionFactory(this.appProperties); 
                 }
             }
            
         }
     }
     
-    public static SqlSessionFactory getSqlSessionFactory() {
+   /**
+     * Construye un SQLSessionFactory usando el archivo de configuración de
+     * MyBatis cuyo nombre está en el archivo de configuración de la aplicación.
+     * @param appProperties
+     * @return una nueva SQLSessionFactory
+     */
+    private SqlSessionFactory getSqlSessionFactory(Properties appProperties) {
         SqlSessionFactory sqlSessionFactory = null;
         if (sqlSessionFactory == null) {
             InputStream inputStream;
             try {
-                inputStream = Resources.getResourceAsStream("mybatis-config.xml");
+                inputStream = Resources.getResourceAsStream(appProperties.getProperty("mybatis-config-file"));
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -64,7 +70,6 @@ public class MyBatisDaoFactory extends DaoFactory {
         }
         return sqlSessionFactory;
     }
-
     
     @Override
     public void beginSession() throws PersistenceException {
