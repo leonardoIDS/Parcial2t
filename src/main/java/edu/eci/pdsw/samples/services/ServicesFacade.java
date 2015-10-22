@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
+import edu.eci.pdsw.samples.entities.Comentario;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import java.io.File;
@@ -24,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,5 +57,17 @@ public class ServicesFacade {
         return instance;
     }
 
+    public Set<Comentario> comms() throws PersistenceException{
+        DaoFactory df= DaoFactory.getInstance(properties);
+        df.beginSession();
+        
+        Set<Comentario> sc=df.getDaoComentario().loadBySuscriptor(0);
+        
+        
+        df.endSession();
+        
+        return sc;
+    }
+    
     
 }

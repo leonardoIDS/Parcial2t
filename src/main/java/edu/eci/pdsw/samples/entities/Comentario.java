@@ -84,5 +84,10 @@ public class Comentario {
         this.suscriptor = suscriptor;
     }
 
+    @Override
+    public String toString() {
+        return "Comentario{" + "id=" + id + ", fecha=" + fecha + ", comentario=" + comentario + ", puntaje=" + puntaje + ", suscriptor=" + suscriptor + '}';
+    }
+
     
 }

@@ -44,7 +44,7 @@ public class MyBatisDaoComentario implements DaoComentario{
 
     @Override
     public Set<Comentario> loadBySuscriptor(int idsuscriptor) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return pmap.comms();
     }
     
     

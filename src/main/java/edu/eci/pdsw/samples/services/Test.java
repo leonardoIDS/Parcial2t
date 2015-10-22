@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.services;
 
+import edu.eci.pdsw.samples.persistence.PersistenceException;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.ComentariosMapper;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +49,10 @@ public class Test {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws ServiceFacadeException {
+    public static void main(String[] args) throws ServiceFacadeException, PersistenceException {
+        
+        System.out.println(ServicesFacade.getInstance("applicationconfig.properties").comms());
+        
         //Paciente p=new Paciente(777,"cc","Pedro Rodriguez",new Date(1,1,1));
         //p.getConsultas().add(new Consulta(new Date(2,2,2), "todo ok"));
         //p.getConsultas().add(new Consulta(new Date(2,2,2), "todo mal"));

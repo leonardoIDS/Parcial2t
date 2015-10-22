@@ -48,6 +48,11 @@ public class Suscriptor {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Suscriptor{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
     
     
     

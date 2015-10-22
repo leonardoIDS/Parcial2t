@@ -16,7 +16,13 @@
  */
 package edu.eci.pdsw.samples.mvccontrollers;
 
+import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.persistence.PersistenceException;
+import edu.eci.pdsw.samples.services.ServicesFacade;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -28,7 +34,22 @@ import javax.faces.bean.ManagedBean;
 @SessionScoped
 public class ConsultaComentariosBackingBean implements Serializable{
     
+    public Set<Comentario> getComs(){
+        try {
+            return ServicesFacade.getInstance("applicationconfig.properties").comms();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ConsultaComentariosBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
     
-    
-    
+    public int getCount(){
+        try {
+            return ServicesFacade.getInstance("applicationconfig.properties").comms().size();
+        } catch (PersistenceException ex) {
+            Logger.getLogger(ConsultaComentariosBackingBean.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        
+    }
 }

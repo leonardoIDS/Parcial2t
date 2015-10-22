@@ -16,6 +16,7 @@
  */
 package edu.eci.pdsw.samples.persistence.mybatisimpl.mappers;
 
+import edu.eci.pdsw.samples.entities.Comentario;
 import java.util.Map;
 import java.util.Set;
 import org.apache.ibatis.annotations.Insert;
@@ -32,6 +33,9 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface ComentariosMapper {
   
+
+    @Select(value = "select id, comentario,puntaje, fecha from COMENTARIOS")
+    public Set<Comentario> comms();
     
     
 }
