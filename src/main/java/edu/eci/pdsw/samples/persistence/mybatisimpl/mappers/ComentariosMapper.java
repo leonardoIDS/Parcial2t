@@ -34,8 +34,6 @@ import org.apache.ibatis.annotations.Select;
 public interface ComentariosMapper {
   
 
-    @Select(value = "select id, comentario,puntaje, fecha from COMENTARIOS")
-    public Set<Comentario> comms();
     
     
 }

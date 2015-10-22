@@ -57,17 +57,8 @@ public class ServicesFacade {
         return instance;
     }
 
-    public Set<Comentario> comms() throws PersistenceException{
-        DaoFactory df= DaoFactory.getInstance(properties);
-        df.beginSession();
-        
-        Set<Comentario> sc=df.getDaoComentario().loadBySuscriptor(0);
-        
-        
-        df.endSession();
-        
-        return sc;
-    }
+           
+    
     
     
 }

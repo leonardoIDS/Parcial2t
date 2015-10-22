@@ -39,12 +39,12 @@ public class MyBatisDaoComentario implements DaoComentario{
 
     @Override
     public Comentario load(int id) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("No se ha implemetado el DAO MyBatis."); 
     }
 
     @Override
     public Set<Comentario> loadBySuscriptor(int idsuscriptor) throws PersistenceException {
-        return pmap.comms();
+        throw new UnsupportedOperationException("No se ha implemetado el DAO MyBatis."); 
     }
     
     

@@ -42,12 +42,12 @@ public class JDBCDaoComentario implements DaoComentario {
         
     @Override
     public Comentario load(int id) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
     }
 
     @Override
     public Set<Comentario> loadBySuscriptor(int idsuscriptor) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
     }
     
 }
