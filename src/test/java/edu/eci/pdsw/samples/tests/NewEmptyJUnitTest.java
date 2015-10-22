@@ -16,31 +16,68 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.persistence.PersistenceException;
+import edu.eci.pdsw.samples.services.ServicesFacade;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author hcadavid
  */
 public class NewEmptyJUnitTest {
-    
+
     public NewEmptyJUnitTest() {
     }
-    
+
     @Before
     public void setUp() {
     }
+
+    @After
+    public void clearDB() throws SQLException {
+        Connection conn = DriverManager.getConnection("jdbc:h2:file:./target/db/testdb;MODE=MYSQL", "sa", "");
+        Statement stmt = conn.createStatement();
+        stmt.execute("delete from COMENTARIOS");
+        stmt.execute("delete from SUSCRIPTORES");
+        conn.commit();
+        conn.close();
+    }
+
     
+    /**
+     * Recuerde cambiar el nombre del método por algo más significativo.
+     * CLASE DE EQUIVALENCIA:
+     * @throws PersistenceException 
+     */
     @Test
-    public void registroPacienteTest(){
+    public void pruebaUnoTest() throws PersistenceException {
+        //insertar datos en la base de datos 'volatil', antes de hacer la prueba
+        
+        //realizar la prueba usando la fachada de servicios haciendo uso de la
+        //configuración que usa la base de datos volatil
+        ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");        
         
     }
-    
+
+    /**
+     * Recuerde cambiar el nombre del método por algo más significativo.
+     * CLASE DE EQUIVALENCIA:
+     * @throws PersistenceException 
+     */
     @Test
-    public void registroConsultaTest(){
+    public void pruebaDosTest() throws PersistenceException {
+        //insertar datos en la base de datos 'volatil', antes de hacer la prueba
+        
+        //realizar la prueba usando la fachada de servicios haciendo uso de la
+        //configuración que usa la base de datos volatil
+        ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");        
         
     }
-    
+
 }

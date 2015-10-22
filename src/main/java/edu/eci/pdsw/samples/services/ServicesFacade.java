@@ -58,7 +58,25 @@ public class ServicesFacade {
     }
 
            
+    /**
+     * Consultar todos los comentarios registrados
+     * @return todos los comentarios
+     * @throws ServiceFacadeException si se presenta un error a nivel de base
+     * de datos
+     */
+    public Set<Comentario> comenteriosRegistrados() throws ServiceFacadeException{
+        return null;
+    }
     
-    
+    /**
+     * Consultar todos los comentarios cuyo puntaje sea menor al valor n
+     * @param n valor de referencia
+     * @return el listado de comentarios cuyo puntaje es mejor que n
+     * @throws ServiceFacadeException si n es negativo o si se presenta un error
+     * a nivel de base de datos
+     */
+    public Set<Comentario> comenteriosMasBajos(int n) throws ServiceFacadeException{
+        return null;
+    }
     
 }
