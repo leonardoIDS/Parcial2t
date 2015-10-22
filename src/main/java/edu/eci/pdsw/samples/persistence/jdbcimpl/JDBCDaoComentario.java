@@ -38,15 +38,15 @@ public class JDBCDaoComentario implements DaoComentario {
 
     public JDBCDaoComentario(Connection con) {
         this.con = con;
-    }
-        
+    }            
+    
     @Override
-    public Comentario load(int id) throws PersistenceException {
+    public Set<Comentario> loadAll() throws PersistenceException {
         throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
     }
 
     @Override
-    public Set<Comentario> loadBySuscriptor(int idsuscriptor) throws PersistenceException {
+    public Set<Comentario> loadByScore(int n) throws PersistenceException {
         throw new UnsupportedOperationException("No se ha implemetado el DAO JDBC."); 
     }
     

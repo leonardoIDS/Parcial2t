@@ -28,14 +28,19 @@ public interface DaoComentario {
 
     
     /**
-     * Consultar un comentario a partir de un identificador
-     * @param id
-     * @return
-     * @throws PersistenceException 
+     * Consultar todos los comentarios
+     * @return el listado de todos los comentarios con sus respectivos suscriptores
+     * @throws PersistenceException si hay un error en la persistencia
      */
-    public Comentario load(int id) throws PersistenceException;
-    
-    public Set<Comentario> loadBySuscriptor(int idsuscriptor) throws PersistenceException;
+    public Set<Comentario> loadAll() throws PersistenceException;
+
+     /**
+     * Consultar todos los comentarios con un puntaje inferior a N
+     * @return el listado de todos los comentarios con sus respectivos suscriptores,
+     * cuyo puntaje sea menor a n
+     * @throws PersistenceException si hay un error en la persistencia
+     */
+    public Set<Comentario> loadByScore(int n) throws PersistenceException;
     
     
 }
