@@ -92,8 +92,45 @@ public class JDBCDaoComentario implements DaoComentario {
     }
 
     @Override
-    public void save(Comentario com, Suscriptor sus) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void save(Comentario com, Suscriptor sus) {       
+        PreparedStatement ps;
+        try{
+            ps=con.prepareStatement("insert into COMENTARIOS(id, comentario, puntaje, fecha, CLIENTES_id) values (?,?,?,?,?)");
+            ps.setInt(1, com.getId());
+            ps.setString(2, com.getComentario());
+            ps.setInt(3, com.getPuntaje());
+            ps.setDate(4, com.getFecha());
+            ps.setInt(5, sus.getId());
+        }catch (SQLException ex) {
+            try {
+                throw new PersistenceException("Error cargando los comentarios",ex);
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(JDBCDaoComentario.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
     }
+    
+   
+
+    @Override
+    public void saveSuscriptor(Suscriptor sus) {       
+        PreparedStatement ps;
+        try{
+            ps=con.prepareStatement("insert into SUSCRIPTOR(id, Nombre) values (?,?)");
+            ps.setInt(1, sus.getId());
+            ps.setString(2, sus.getNombre());
+           ;
+        }catch (SQLException ex) {
+            try {
+                throw new PersistenceException("Error cargando los comentarios",ex);
+            } catch (PersistenceException ex1) {
+                Logger.getLogger(JDBCDaoComentario.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+    }
+
+   
+    
+    
     
 }

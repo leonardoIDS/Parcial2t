@@ -118,6 +118,18 @@ public class ServicesFacade {
             Logger.getLogger(ServicesFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+        public void RegistrarSuscriptor(Suscriptor sus) {
+        try{
+            DaoFactory df=DaoFactory.getInstance(properties);
+            df.beginSession();
+            df.getDaoComentario().saveSuscriptor(sus);
+            df.commitTransaction();
+            df.endSession();
+        }catch(PersistenceException ex){
+            Logger.getLogger(ServicesFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
         
 
 

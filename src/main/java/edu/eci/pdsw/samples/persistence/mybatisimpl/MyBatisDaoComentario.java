@@ -53,6 +53,11 @@ public class MyBatisDaoComentario implements DaoComentario{
     public void save(Comentario com, Suscriptor sus) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void saveSuscriptor(Suscriptor sus) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

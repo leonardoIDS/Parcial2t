@@ -44,6 +44,9 @@ public interface DaoComentario {
     public Set<Comentario> loadByScore(int n) throws PersistenceException;
 
     public void save(Comentario com, Suscriptor sus);
+    public void saveSuscriptor(Suscriptor sus);
+
+ 
     
     
 }

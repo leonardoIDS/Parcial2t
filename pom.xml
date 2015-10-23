@@ -7,7 +7,7 @@
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>2015-2-par2t</name>
+    <name>2015-2-par2t_Leonardo_Castro</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

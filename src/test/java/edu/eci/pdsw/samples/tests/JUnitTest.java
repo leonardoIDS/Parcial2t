@@ -82,6 +82,7 @@ public class JUnitTest {
         //insertar datos en la base de datos 'volatil', antes de hacer la prueba
         Suscriptor sus = new Suscriptor(01,"Leonardo");
         Comentario com;
+        
         com = new Comentario(01,new Date(2015,10,3),"Esta muy genial",10,sus);
         Suscriptor sus2 = new Suscriptor(02,"Fabio");
         Comentario com2;
@@ -95,7 +96,8 @@ public class JUnitTest {
        
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
         
-        
+        sf.RegistrarSuscriptor(sus);
+        sf.RegistrarSuscriptor(sus2);
         sf.RegistrarComentario(com2,sus2);
         sf.RegistrarComentario(com,sus);
         
@@ -137,7 +139,9 @@ public class JUnitTest {
         
        
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
-        
+        sf.RegistrarSuscriptor(sus);
+        sf.RegistrarSuscriptor(sus2);
+        sf.RegistrarSuscriptor(sus3);
         sf.RegistrarComentario(com3,sus3);
         sf.RegistrarComentario(com2,sus2);
         sf.RegistrarComentario(com,sus);
@@ -179,7 +183,9 @@ public class JUnitTest {
         
        
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
-        
+        sf.RegistrarSuscriptor(sus);
+        sf.RegistrarSuscriptor(sus2);
+        sf.RegistrarSuscriptor(sus3);
         sf.RegistrarComentario(com3,sus3);
         sf.RegistrarComentario(com,sus);
         sf.RegistrarComentario(com2,sus2);
