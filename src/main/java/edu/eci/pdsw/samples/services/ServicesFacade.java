@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.services;
 
 import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.entities.Suscriptor;
 import edu.eci.pdsw.samples.persistence.DaoComentario;
 import edu.eci.pdsw.samples.persistence.DaoFactory;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
@@ -106,9 +107,18 @@ public class ServicesFacade {
 
  
 
-    public void RegistrarComenterio(Comentario com) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void RegistrarComentario(Comentario com, Suscriptor sus) {
+        try{
+            DaoFactory df=DaoFactory.getInstance(properties);
+            df.beginSession();
+            df.getDaoComentario().save(com,sus);
+            df.commitTransaction();
+            df.endSession();
+        }catch(PersistenceException ex){
+            Logger.getLogger(ServicesFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+        
 
 
 }

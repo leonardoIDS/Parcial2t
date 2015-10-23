@@ -51,44 +51,49 @@ public class JDBCDaoComentario implements DaoComentario {
         PreparedStatement ps;
         HashSet<Comentario> allCom=new HashSet<Comentario>();
         try {
-            ps = con.prepareStatement("select * from COMENTARIOS");   
+            //ps = con.prepareStatement("select * from COMENTARIOS");   
+            ps= con.prepareStatement("select coment.id, coment.comentario, coment.puntaje, coment.fecha, suscri.nombre from COMENTARIOS AS coment INNER JOIN SUSCRIPTORES AS suscri where coment.CLIENTES_id=suscri.id");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){ 
                 
-                allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+                //allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+                allCom.add(new Comentario(rs.getInt("id"), rs.getDate("fecha"), rs.getString("comentario"), rs.getInt("puntaje"), new Suscriptor(rs.getInt("id"), rs.getString("nombre"))));
             }
             return allCom;
-        }catch (SQLException ex) {
+            }
+            
+        catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading an order.",ex);
         }
         
-        
-        
-
     }
 
     @Override
     public Set<Comentario> loadByScore(int n) throws PersistenceException {
-                PreparedStatement ps;
+        PreparedStatement ps;
         HashSet<Comentario> allCom=new HashSet<Comentario>();
         try {
-            ps = con.prepareStatement("select * from COMENTARIOS where puntaje > ?");
+            //ps = con.prepareStatement("select * from COMENTARIOS");   
+            ps= con.prepareStatement("select coment.id, coment.comentario, coment.puntaje, coment.fecha, suscri.nombre from COMENTARIOS AS coment INNER JOIN SUSCRIPTORES AS suscri where coment.CLIENTES_id=suscri.id where id > ?");
             ps.setInt(1, n);
             ResultSet rs=ps.executeQuery();
             while(rs.next()){ 
                 
-                allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+                //allCom.add(new Comentario (rs.getInt(1),rs.getDate(2),rs.getString(3),rs.getInt(4),rs.getObject(5,Suscriptor);
+                allCom.add(new Comentario(rs.getInt("id"), rs.getDate("fecha"), rs.getString("comentario"), rs.getInt("puntaje"), new Suscriptor(rs.getInt("id"), rs.getString("nombre"))));
             }
-      
-            
             return allCom;
-        }catch (SQLException ex) {
+            }
+            
+        catch (SQLException ex) {
             throw new PersistenceException("An error ocurred while loading an order.",ex);
         }
         
-        
-        
-    
+    }
+
+    @Override
+    public void save(Comentario com, Suscriptor sus) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

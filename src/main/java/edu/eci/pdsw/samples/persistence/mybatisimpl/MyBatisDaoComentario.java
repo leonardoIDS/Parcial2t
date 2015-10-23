@@ -18,6 +18,7 @@ package edu.eci.pdsw.samples.persistence.mybatisimpl;
 
 
 import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.entities.Suscriptor;
 import edu.eci.pdsw.samples.persistence.DaoComentario;
 import edu.eci.pdsw.samples.persistence.PersistenceException;
 import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.ComentariosMapper;
@@ -46,6 +47,11 @@ public class MyBatisDaoComentario implements DaoComentario{
     @Override
     public Set<Comentario> loadByScore(int n) throws PersistenceException {
         throw new UnsupportedOperationException("No se ha implemetado el DAO MyBatis."); 
+    }
+
+    @Override
+    public void save(Comentario com, Suscriptor sus) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

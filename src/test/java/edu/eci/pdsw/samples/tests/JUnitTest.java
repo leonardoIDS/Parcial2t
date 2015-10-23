@@ -96,8 +96,8 @@ public class JUnitTest {
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
         
         
-        sf.RegistrarComenterio(com2);
-        sf.RegistrarComenterio(com);
+        sf.RegistrarComentario(com2,sus2);
+        sf.RegistrarComentario(com,sus);
         
         
         Set<Comentario> regis = sf.comenteriosRegistrados();
@@ -138,9 +138,9 @@ public class JUnitTest {
        
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
         
-        sf.RegistrarComenterio(com3);
-        sf.RegistrarComenterio(com2);
-        sf.RegistrarComenterio(com);
+        sf.RegistrarComentario(com3,sus3);
+        sf.RegistrarComentario(com2,sus2);
+        sf.RegistrarComentario(com,sus);
         
         
         Set<Comentario> regis = sf.comenteriosMasBajos(6);                
@@ -180,9 +180,9 @@ public class JUnitTest {
        
         ServicesFacade sf=ServicesFacade.getInstance("h2-applicationconfig.properties");    
         
-        sf.RegistrarComenterio(com3);
-        sf.RegistrarComenterio(com);
-        sf.RegistrarComenterio(com2);
+        sf.RegistrarComentario(com3,sus3);
+        sf.RegistrarComentario(com,sus);
+        sf.RegistrarComentario(com2,sus2);
         
         
         Set<Comentario> regis = sf.comenteriosMasBajos(6);                

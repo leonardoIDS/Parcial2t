@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.persistence;
 
 import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.entities.Suscriptor;
 import java.util.Set;
 
 
@@ -41,6 +42,8 @@ public interface DaoComentario {
      * @throws PersistenceException si hay un error en la persistencia
      */
     public Set<Comentario> loadByScore(int n) throws PersistenceException;
+
+    public void save(Comentario com, Suscriptor sus);
     
     
 }
